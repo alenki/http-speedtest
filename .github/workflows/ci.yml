@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # All Node.js versions on Linux, and the current LTS on Windows and macOS.
+        os: [ubuntu-latest]
+        node: [20, 22, 24, 26]
+        include:
+          - os: windows-latest
+            node: 26
+          - os: macos-latest
+            node: 26
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          # No dependencies, so there is nothing to cache.
+          package-manager-cache: false
+      - run: npm test
+      - name: CLI smoke test
+        run: node speedtest.js --help

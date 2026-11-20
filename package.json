@@ -1,0 +1,28 @@
+{
+  "name": "http-speedtest",
+  "version": "1.0.0",
+  "description": "CLI that measures download speed: fetches a URL several times in a row and reports the average request time, total data and speed",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "http-speedtest": "speedtest.js"
+  },
+  "files": [
+    "speedtest.js",
+    "src/"
+  ],
+  "scripts": {
+    "start": "node speedtest.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "speedtest",
+    "bandwidth",
+    "download",
+    "http",
+    "cli"
+  ]
+}
